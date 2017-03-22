@@ -1,5 +1,5 @@
 
-Img = readImage('images.jpg'); % real miscroscope image of cells
+Img = readImage('images.jpg'); 
 imwrite(Img,'grey.jpg');
 %Img = logTransformation('grey.jpg');
 %title('after log');
@@ -59,6 +59,7 @@ for n=1:iter_outer
 end
 
 % refine the zero level contour by further level set evolution with alfa=0
+%%cannot work now because i didn't upload drlse.m
 alfa=0;
 iter_refine = 10;
 phi = drlse(phi, g, lambda, mu, alfa, epsilon, timestep, iter_inner, potentialFunction);
