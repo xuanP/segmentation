@@ -10,4 +10,4 @@ After searching for some information, for implicit active contour models, I foun
 	IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 19, NO. 12, DECEMBER 2010
 
 * Attention that logTransformation.m is not useful until now because I found when using it, the segmentation is even worse
-* easy_seg.m is the main file to run, others are just functions. Easy_seg.m can do basic segmentation now.
+* easy_seg.m is the main file to run, others are just functions. Easy_seg.m can do basic segmentation now. But the drlse.m is still under modifying so it's not uploaded now.
