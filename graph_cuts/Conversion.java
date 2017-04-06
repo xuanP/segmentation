@@ -5,10 +5,8 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.Color;
 import java.util.*;
-// http://stackoverflow.com/questions/6524196/java-get-pixel-array-from-image
-// http://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
 
-public class MinCut {
+public class Conversion {
 	
 	public static int[] lambda={45,23};
 	public static int height,width,nbPixels;
@@ -380,55 +378,4 @@ public class MinCut {
 			}
 		}	
 	}
-
-   private static int[][] convertTo2DWithoutUsingGetRGB(BufferedImage image) {
-
-      final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-      final int width = image.getWidth();
-      final int height = image.getHeight();
-
-      int[][] result = new int[height][width];
-      
-      if (image.getAlphaRaster() != null) {  //Un pixel->4 composantes (RGB + Alpha)
-         final int pixelLength = 4;
-         for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
-            int argb = 0;
-           // argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
-            argb += ((int) pixels[pixel + 1] & 0xff); // blue
-            argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
-            argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
-            if(argb/3>128)
-				result[row][col] = 1;
-            else
-				result[row][col] = 0;
-            col++;
-            if (col == width) {
-               col = 0;
-               row++;
-            }
-         }
-      } else {					//Un pixel -> 3 Composantes(RGB)
-         final int pixelLength = 3;
-         for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
-            int blue,red,green;
-            blue = ((int) pixels[pixel] & 0xff); // blue
-            green = (((int) pixels[pixel + 1] & 0xff) << 8); // green
-            red = (((int) pixels[pixel + 2] & 0xff) << 16); // red
-            if((blue+red+green)/3>128){
-				result[row][col] = 1;
-			} else {
-				result[row][col] = 0;
-			}
-            col++;
-            if (col == width) {
-               col = 0;
-               row++;
-            }
-         }
-      }
-
-      return result;
-   }
 }
-
-
