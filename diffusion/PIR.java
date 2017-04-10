@@ -32,12 +32,12 @@ import java.util.Arrays;
 	public static String PATH;
 	
 	public static void main (String args[]) throws IOException{
-		String path="horse.png";
+		String path="cercle.png";
 		//PATH=path;
 		double[][] tab=tool.getArray(path);
 		//meanSmooth(tab,10);
 		double sig=turkey.sigmae(tab);
-		tab=turkey.smooth(tab,50,sig,path);
+		tab=turkey.border(tab,5,sig,path);
 		
 	}
         

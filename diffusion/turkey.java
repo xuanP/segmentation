@@ -7,17 +7,30 @@ import java.util.Arrays;
 
 public class turkey {
 	public static double lambda=1;
+	
+	
+	
 	public static double biweight(double x, double sigma){
 		//X DIFFERENCE ENTRE PIXEL ET SON VOISIN
-		if(Math.abs(x)<=sigma) return  (x * Math.pow( 1 - Math.pow(x/sigma,2),2));
-		else return 0;
+		if(Math.abs(x)<=sigma) {
+			return  (x * Math.pow( 1 - Math.pow(x/sigma,2),2));
+		} else{
+			 return 0;
+		}
 	}
 
-	public static double sigmae(double[][] img){
-		int l=img.length*img[1].length;
+	public static double sigmae(double[][] img) throws IOException{
+		int l=img.length*img[0].length;
 		double[] source =new double[l];
-		
-		
+		img=tool.gradient(img);
+			/*	for(int y = 1; y <16; y++){
+					for(int x = 1; x <16; x++){
+						System.out.print(img[x][y]+"  ");
+					}
+					System.out.println("  ");
+				}*/
+               
+               
 		int k=0;
 		for(int i=0;i<img.length;i++){
 			for(int j=0;j<img[0].length;j++){
@@ -46,6 +59,9 @@ public class turkey {
 
 	}
 		
+	
+	
+	
 	public static double[][] smooth(double[][] Source,int intensity,double sigma,String PATH) throws IOException{
 			
 			int w =  Source[0].length;
@@ -77,21 +93,27 @@ public class turkey {
 							Output[x][y]=(Source[x+1][y]+Source[x-1][y]+Source[x][y+-1])/3;
 						}else {
 							//GENERAL
-							Output[x][y]= Output[x][y]+lambda*(biweight(Source[x-1][y]-Output[x][y],sigma)+
+							Output[x][y]= Output[x][y]+(biweight(Source[x-1][y]-Output[x][y],sigma)+
 										biweight(Source[x+1][y]-Output[x][y],sigma)+
 										biweight(Source[x][y+1]-Output[x][y],sigma)+
 										biweight(Source[x][y-1]-Output[x][y],sigma))/4;
+							System.out.println( Source[x][y+1]-Output[x][y]+ "   "+biweight(Source[x][y+1]-Output[x][y],sigma));
 						}
 					}
 				}
 			Source=Output;
 		}
-		tool.getImage(Output,"turkeySmooth"+intensity+"_"+sigma+PATH);
+		tool.getImage(Output,"turkeySmooth"+intensity+"_"+sigma+"_"+PATH);
 		return Output;
 	}	
 	
+	
+	
+	
+	
+	
 	public static double[][] border(double[][] Source,int intensity,double sigma,String PATH) throws IOException{
-			System.out.println(Arrays.toString(Source[160]));
+			//System.out.println(Arrays.toString(Source[160]));
 			int w =  Source[0].length;
 			int h =  Source.length;
 			//System.out.println("H= "+h+"   w="+w);
