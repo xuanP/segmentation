@@ -2,6 +2,7 @@
 
 function levelset = AOS(Image, levelset, Force, time_step , iter, g) 
 count = 1; 
+figure();
 while count < iter 
     %supppose the a=g,b=1(geometric model)
     Dphi = GetDifference(levelset);%this is |gradient u|
@@ -26,6 +27,8 @@ while count < iter
     levelset = (levelset1 + levelset2')./2; %get the new contour from contour1 and contour2's transpose
     
     count = count+1; 
+    
     imshow( Image, [] ); hold on;  contour( levelset, [0,0], 'g'); hold off; drawnow %show the new contour
 end 
+ 
  
