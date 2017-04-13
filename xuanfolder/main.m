@@ -9,8 +9,9 @@ g=stopFunction(img,1,sigma);
 %initial LSF
 LSF=Ini_square(img,5);
 figure();
-imagesc(img);
-colormap(gray);
+%imagesc(img);=>to show a scalable image.
+%colormap(gray);
+imshow(img);
 hold on;
 [c,h]=contour(LSF,[0 0],'r');
 title('initial contour');
