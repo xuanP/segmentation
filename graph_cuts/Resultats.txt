@@ -1,9 +1,0 @@
-Image yin-yang bruitée à 25%, taille 183*275
-
-Beta=11 ; Lambda=45,23;
-->Running-time: 231 038
-
-Beta=25 ; Lambda=45,23;
-->Running-time: 267 189
-
-
