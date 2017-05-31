@@ -3,8 +3,9 @@
 function levelset = AOS(Image, levelset, Force, time_step , iter, g) 
 count = 1; 
 figure();
+
 while count < iter 
-    %supppose the a=g,b=1(geometric model)
+   
     Dphi = GetDifference(levelset);%this is |gradient u|
     absDphi = Upwind (levelset, Force);%according to (12) should be upwind scheme. Still working on this method. 
     Balloon_force=  Force .* g .*absDphi;%|grad u|*k*g 
@@ -20,6 +21,9 @@ while count < iter
     
     b=g;%geodesic
     a=1;%geodesic
+    %b=1;%geometric  ::doesn't work very well,cannot figure out why
+    %a=g;%geometric
+    
     levelset1 = LinearSystem(2*time_step, levelset+time_step.*Balloon_force,Dphi, b,a); 
     levelset2 = LinearSystem(2*time_step, (levelset+time_step.*Balloon_force)', Dphi', b',a);%change direction x to y
     %time_step multiply 2 because in formule(11) there is a 2
@@ -29,6 +33,7 @@ while count < iter
     count = count+1; 
     
     imshow( Image, [] ); hold on;  contour( levelset, [0,0], 'g'); hold off; drawnow %show the new contour
+    title('final image');
 end 
  
  
